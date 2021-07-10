@@ -18,7 +18,7 @@ export default function Filtering (){
   console.log(cities);
   return(
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+      <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
@@ -31,7 +31,7 @@ export default function Filtering (){
             </Dropdown.Toggle>
 
             {/* <Dropdown.Menu  style={{overflowY: 'scroll', maxHeight: (window.innerHeight)}}> */}
-            <Dropdown.Menu>
+            <Dropdown.Menu> 
               {cities.map(city =>
                 <Dropdown.Item>{city.municipio}</Dropdown.Item>  
               )}
