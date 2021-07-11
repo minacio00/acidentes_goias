@@ -44,9 +44,6 @@ export default function Incidents (){
         }).then(jsonResponse =>{
           setMapCenter([jsonResponse[0].latitude,jsonResponse[0].longitude]);
           setInitialState(jsonResponse)});
-   // por algum motivo o marker não somme quando seus estados mudam
-    // setMapCenter([initialState[0].latitude,initialState[0].longitude])
-    // console.log(mapCenter)
   }
 
   
@@ -100,10 +97,17 @@ export default function Incidents (){
             { initialState.map(incident => 
               <>
                 <Marker
-                    key ={count++}
+                    key ={incident.id}//count++}
                     marker_index={[incident.latitude,incident.longitude]}
                     position ={[incident.latitude,incident.longitude]}
-                  />
+                >
+                  <Popup>
+                    latitude: {incident.latitude} <br/>
+                    longitude: {incident.longitude} <br/>
+                    municipio: {incident.municipio} <br/>
+                    regional: {incident.regional}
+                  </Popup>
+                </Marker>
               </>
 
             )}

@@ -7,7 +7,7 @@ import {useMap}from 'react-leaflet';
 function ChangeMapView({coords}) {
     const map = useMap();
     // map.setView(coords, map.getZoom());
-    map.setView(coords, 13);
+    map.flyTo(coords, 13);
   
     return null;
   }

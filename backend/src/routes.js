@@ -1,20 +1,30 @@
 const { json } = require('express');
 const express = require('express');
+const { Knex } = require('knex');
 const routes = express.Router();
 const database = require('./database/db');
 
 routes.get('/api/',async (req,res)=>{
-   const acidentes = await database('acidentes')
-   .select(['id','latitude','longitude'])
-   .where('uf', '=','GO')
-   // .limit(50);
-   return res.json(acidentes) 
+   const acidentes = await database('acidentes_2')
+   .select(['acidentes.id','latitude','longitude','municipio.nome','causa','uf.uf'])
+   .from('acidentes')
+   // .whereRaw('acidentes.uf_id = uf.id')
+   .join('uf','uf.id','=','acidentes.uf_id')
+   .join('municipio','municipio.id','=','acidentes.municipio_id')
+   // .orderBy('municipio.nome','asc')
+   
+
+
+
+   // .limit(70);
+   return (res.json(acidentes));
+  
 })
 
 routes.get('/city',async (req,res)=>{
    // const municipio = req.body.municipio.toUpperCase();
    const acidentes = await database('acidentes')
-   .select('municipio').where('uf', '=','GO').groupBy('municipio')
+   .select('municipio').where('uf', '=','GO').groupBy('municipio').orderBy('municipio','asc')
    // .where('municipio', '=',municipio)
    return res.json(acidentes);
 })
